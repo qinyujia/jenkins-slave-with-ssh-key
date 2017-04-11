@@ -41,6 +41,10 @@ ADD slave.sh /usr/local/bin/slave.sh
 RUN chmod +x /usr/local/bin/slave.sh
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
+#ssh
+RUN mkdir /home/jenkins/.ssh
+ADD id_rsa.pub /home/jenkins/.ssh/id_rsa.pub
+RUN cat /home/jenkins/.ssh/id_rsa.pub > /home/jenkins/.ssh/authorized_keys
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
